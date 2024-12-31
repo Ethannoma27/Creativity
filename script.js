@@ -1,31 +1,20 @@
-document.getElementById('escapeBtn').addEventListener('click', function() {
-    // 让页面进入自由状态
-    document.body.classList.add('freedom');
-    document.getElementById('frame').style.transition = 'all 2s ease-out';
-    
-    // 更新文本
-    setTimeout(function() {
-        document.getElementById('message').innerText = '我的人生属于我自己！';
-    }, 1500);
+// 显示弹窗
+function showModal() {
+    const modal = document.getElementById("modal");
+    modal.classList.add("show"); // 添加 "show" 类来显示弹窗
+}
 
-    // 触发粒子效果
-    createParticles();
+// 关闭弹窗
+function closeModal() {
+    const modal = document.getElementById("modal");
+    modal.classList.remove("show"); // 移除 "show" 类来隐藏弹窗
+}
+
+// 为文档添加点击事件，以便点击页面的任意区域关闭弹窗
+window.addEventListener("click", function(event) {
+    const modal = document.getElementById("modal");
+    if (event.target === modal) { // 如果点击的是弹窗外部区域
+        closeModal();
+    }
 });
 
-// 粒子效果函数
-function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    for (let i = 0; i < 30; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.animationDuration = `${Math.random() * 2 + 1}s`;
-        particlesContainer.appendChild(particle);
-
-        // 删除粒子
-        setTimeout(() => {
-            particle.remove();
-        }, 3000);
-    }
-}
